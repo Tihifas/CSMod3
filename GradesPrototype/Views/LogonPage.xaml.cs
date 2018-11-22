@@ -38,7 +38,7 @@ namespace GradesPrototype.Views
         private void Logon_Click(object sender, RoutedEventArgs e)
         {
             SessionContext.UserName = username.Text;
-            SessionContext.UserRole = userrole.;
+            //SessionContext.UserRole = userrole.;
             //SessionContext.UserRole = (bool)userrole.IsChecked ? Role.Teacher : Role.Student;
         }
 
