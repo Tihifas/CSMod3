@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -56,7 +57,26 @@ namespace GradesPrototype.Views
         // Grades data is hardcoded in the XAML code for the StudentProfile view in this version of the prototype
         public void Refresh()
         {
+            Match matchNames = Regex.Match(SessionContext.CurrentStudent, @"([^]+)([^]+)");
+            if (matchNames.Length >= 2)
+            {
+                Debug.WriteLine("I'm here!");
+                firstName.Text = matchNames.Captures[0].Value;
+                for (int i = 1; i < matchNames.Captures.Count; i++) //Starts at i=1 !
+                {
+                    if (i >= 3) lastName.Text += " ";
+                    lastName.Text += matchNames.Captures[i].Value;
+                }
+            }
 
+            if (SessionContext.UserRole == Role.Student)
+            {
+                btnBack.Visibility = Visibility.Hidden;
+            }
+            if (SessionContext.UserRole == Role.Teacher)
+            {
+                btnBack.Visibility = Visibility.Visible;
+            }
         }
     }
 }

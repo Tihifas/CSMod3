@@ -29,7 +29,7 @@ namespace GradesPrototype.Views
 
         #region Event Members
         // TODO: Exercise 1: Task 2a: Define the LogonSuccess event handler
-        public event EventHandler LogonSucces;
+        public event EventHandler LogonSuccess;
 
         #endregion
 
@@ -38,8 +38,11 @@ namespace GradesPrototype.Views
         private void Logon_Click(object sender, RoutedEventArgs e)
         {
             SessionContext.UserName = username.Text;
-            //SessionContext.UserRole = userrole.;
-            //SessionContext.UserRole = (bool)userrole.IsChecked ? Role.Teacher : Role.Student;
+            SessionContext.UserRole = (bool) userrole.IsChecked ? Role.Teacher : Role.Student;
+
+            if (SessionContext.UserRole == Role.Student) SessionContext.CurrentStudent = "Eric Gruber"; //Always Eric?£
+
+            LogonSuccess(this, null);
         }
 
         //<TextBlock Grid.Row="0" FontSize= "24" Text= "Username: " />
